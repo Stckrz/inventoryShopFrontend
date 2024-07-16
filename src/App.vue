@@ -69,6 +69,5 @@ export default defineComponent({
 	display: flex;
 	justify-content: center;
 	flex-grow: 1;
-
 }
 </style>

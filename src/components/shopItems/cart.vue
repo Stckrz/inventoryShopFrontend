@@ -19,14 +19,11 @@ export default defineComponent({
 			}
 			return (total)
 		}
-		const processOrderRoute = () => {
-
-		}
 
 		onMounted(() => {
 			cartTotal.value = getCartTotal();
 		})
-		return { store, cartTotal, processOrderRoute }
+		return { store, cartTotal }
 	}
 })
 </script>
@@ -73,9 +70,14 @@ export default defineComponent({
 	justify-content: space-between;
 	width: 30%;
 	height: 92%;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
-
+.cartItemTable{
+	border: none;
+}
+th {
+	border: none;
+}
 .cartItemTableContainer {
 	max-height: 90%;
 	overflow: auto;
@@ -87,7 +89,7 @@ export default defineComponent({
 	align-items: center;
 	gap: 5px;
 	height: 10%;
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 	width: 100%;
 }
 

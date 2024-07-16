@@ -11,18 +11,7 @@ interface UpdateQuantityObject {
 
 export default createStore({
 	state: {
-		orderItems: [
-			{
-				shopItemId: 0,
-				shopItemName: "ass",
-				shopItemCategory: "",
-				price: 20,
-				buyPrice: 0,
-				quantity: 12,
-				parAmount: 0,
-				orderAmount: 5
-			}
-		]
+		orderItems: []
 	},
 	mutations: {
 		addOrderItem(state: State, orderItem: OrderItem) {
