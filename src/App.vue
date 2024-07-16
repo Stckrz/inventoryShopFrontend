@@ -1,28 +1,49 @@
-<script setup lang="ts">
-	import categoryPicker from './components/shopItems/categoryPicker.vue';
+<script lang="ts">
+import categoryPicker from './components/shopItems/categoryPicker.vue';
+import { defineComponent, ref } from 'vue';
+import Cart from './components/shopItems/cart.vue'
+export default defineComponent({
+	name: "App",
+	components: {
+		categoryPicker,
+		Cart
+	},
+	setup() {
+		const cartOpen = ref(false);
+		const toggleCart = () => {
+			cartOpen.value = !cartOpen.value
+		}
+		return { toggleCart, cartOpen }
+	}
+})
 </script>
 
 <template>
 	<nav class="navbar">
 		<RouterLink class="navItem" to="/">Home</RouterLink>
+		<div @click="toggleCart" class="navItem">Cart</div>
 	</nav>
 
 	<div class="appContainer">
 		<categoryPicker />
 		<div class="contentsContainer">
-		<RouterView></RouterView>
+			<RouterView></RouterView>
+		</div>
+		<div v-if="cartOpen">
+			<Cart :toggleCart="toggleCart"/>
 		</div>
 	</div>
 </template>
 
 <style scoped>
-.appContainer{
+.appContainer {
 	display: flex;
 	align-items: flex-start;
 	justify-content: flex-start;
 	display: flex;
 	width: 98%;
 }
+
 .navbar {
 	width: 100vw;
 	height: 6%;
