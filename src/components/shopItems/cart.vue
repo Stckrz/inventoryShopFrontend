@@ -9,7 +9,7 @@ export default defineComponent({
 			required: true
 		}
 	},
-	setup(props) {
+	setup() {
 		const store = useStore();
 		const cartTotal = ref(0);
 		const getCartTotal = () => {
@@ -31,6 +31,7 @@ export default defineComponent({
 <template>
 	<div class="cartView">
 		<div class="cartItemTableContainer">
+		<button class="cartCloseButton" @click="toggleCart">X</button>
 			<table class="cartItemTable">
 				<tr>
 					<th>Name</th>
@@ -70,7 +71,6 @@ export default defineComponent({
 	justify-content: space-between;
 	width: 30%;
 	height: 92%;
-	/*border: 1px solid black;*/
 }
 .cartItemTable{
 	border: none;
@@ -82,6 +82,11 @@ th {
 	max-height: 90%;
 	overflow: auto;
 }
+.cartCloseButton{
+	padding: 4px;
+	background-color: #acb0aa;
+	width: 10%;
+}
 
 .totalBox {
 	display: flex;
@@ -89,7 +94,6 @@ th {
 	align-items: center;
 	gap: 5px;
 	height: 10%;
-	/*border: 1px solid black;*/
 	width: 100%;
 }
 

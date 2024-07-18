@@ -21,7 +21,7 @@ export default defineComponent({
 <template>
 	<nav class="navbar">
 		<RouterLink class="navItem" to="/">Home</RouterLink>
-		<div @click="toggleCart" class="navItem">Cart</div>
+		<div @click="toggleCart" class="navItem navCart">Cart</div>
 	</nav>
 
 	<div class="appContainer">
@@ -49,6 +49,7 @@ export default defineComponent({
 	height: 6%;
 	display: flex;
 	align-items: center;
+	justify-content: flex-start;
 	background-color: #737994;
 	user-select: none;
 }
@@ -62,6 +63,9 @@ export default defineComponent({
 	color: white;
 	border-right: 1px solid black;
 	cursor: pointer;
+}
+.navCart{
+	display: flex;
 }
 
 .contentsContainer {

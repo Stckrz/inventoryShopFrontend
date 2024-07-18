@@ -1,7 +1,8 @@
 <script lang="ts">
-import { defineComponent, ref, onMounted, PropType } from 'vue';
+import { defineComponent, ref, PropType } from 'vue';
 import { useStore } from 'vuex';
 import { OrderItem } from '../../models/shopItemModel';
+
 export default defineComponent({
 	name: "QuantityCounter",
 	props: {
@@ -26,7 +27,7 @@ export default defineComponent({
 		}
 		const addItem = () => {
 			if (quantity.value > 0) {
-				const itemInCart = store.state.orderItems.find(item => props.orderItem.shopItemId === item.shopItemId)
+				const itemInCart = store.state.orderItems.find((item: OrderItem) => props.orderItem.shopItemId === item.shopItemId)
 				if (itemInCart === undefined) {
 					const item = {
 						shopItemId: props.orderItem.shopItemId,
@@ -44,10 +45,8 @@ export default defineComponent({
 				}
 			}
 		}
-
 		return { quantity, handleDecrement, handleIncrement, addItem }
 	}
-
 })
 </script>
 
@@ -59,9 +58,9 @@ export default defineComponent({
 			<div class="countButton" @click="handleIncrement">+</div>
 		</div>
 		<div class="cartAddButtonBox">
-			<div @click="addItem" class="cartAddButton" button>
+			<button @click="addItem" class="addItemButton" button>
 				Add
-			</div>
+			</button>
 		</div>
 	</div>
 </template>
@@ -98,16 +97,10 @@ export default defineComponent({
 	border-radius: 2em;
 }
 
-.cartAddButtonBox {
-	text-align: center;
-	width: 20%;
-	height: 50%;
-	background-color: #acb0cb;
-	padding: 2px;
-	border-radius: 5px;
-}
-
-.cartAddButtonBox:hover {
-	background-color: #9ca0b0;
+.addItemButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 2em;
 }
 </style>
