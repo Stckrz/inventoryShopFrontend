@@ -1,18 +1,24 @@
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { categories } from '../../models/shopItemModel';
+import { defineComponent, onMounted, ref } from 'vue';
+import { getSaleItemCategories } from '../../library/api/storeItemApi';
+
 export default defineComponent({
 	name: "CategoryPicker",
 	setup() {
-		return { categories }
+		const saleItemCategories = ref<string[]>([]);
+		onMounted(() => {
+			getSaleItemCategories().then((data: string[]) => {
+				saleItemCategories.value = data;
+			})
+		})
+		return { saleItemCategories }
 	}
-
 })
 </script>
 
 <template>
-	<div class="buttonBox">
-		<div class="categoryButton" v-for="item in categories">
+	<div v-if="saleItemCategories" class="buttonBox">
+		<div class="categoryButton" v-for="item in saleItemCategories">
 			<RouterLink :to="'/categoryList/' + item">
 				{{ item }}
 			</RouterLink>
@@ -20,11 +26,11 @@ export default defineComponent({
 	</div>
 </template>
 
-<style>
+<style scoped>
 .buttonBox {
 	margin: 5px;
 	display: flex;
-	align-self: center;
+	align-self: flex-start;
 	flex-direction: column;
 }
 
@@ -37,7 +43,8 @@ export default defineComponent({
 	display: flex;
 	flex-grow: 1;
 }
-.categoryButton:hover{
+
+.categoryButton:hover {
 	background-color: #9ca0b0;
 }
 
@@ -45,4 +52,5 @@ export default defineComponent({
 	color: black;
 	text-decoration: none;
 }
+
 </style>

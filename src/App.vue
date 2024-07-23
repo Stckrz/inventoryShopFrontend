@@ -46,7 +46,7 @@ export default defineComponent({
 
 .navbar {
 	width: 100vw;
-	height: 6%;
+	height: 40px;
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
