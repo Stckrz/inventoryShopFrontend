@@ -1,13 +1,13 @@
 <script lang="ts">
 import { defineComponent, ref, PropType } from 'vue';
 import { useStore } from 'vuex';
-import { OrderItem } from '../../models/shopItemModel';
+import { OrderItem, ShopItem } from '../../models/shopItemModel';
 
 export default defineComponent({
 	name: "QuantityCounter",
 	props: {
-		orderItem: {
-			type: Object as PropType<OrderItem>,
+		shopItem: {
+			type: Object as PropType<ShopItem>,
 			required: true
 		}
 	},
@@ -21,27 +21,27 @@ export default defineComponent({
 			}
 		}
 		const handleIncrement = () => {
-			if (quantity.value < props.orderItem.quantity) {
+			if (quantity.value < props.shopItem.quantity) {
 				quantity.value++
 			}
 		}
 		const addItem = () => {
 			if (quantity.value > 0) {
-				const itemInCart = store.state.orderItems.find((item: OrderItem) => props.orderItem.shopItemId === item.shopItemId)
+				const itemInCart = store.state.orderItems.find((item: OrderItem) => props.shopItem.shopItemId === item.shopItemId)
 				if (itemInCart === undefined) {
 					const item = {
-						shopItemId: props.orderItem.shopItemId,
-						shopItemName: props.orderItem.shopItemName,
-						shopItemCategory: props.orderItem.shopItemCategory,
-						price: props.orderItem.price,
-						buyPrice: props.orderItem.buyPrice,
-						quantity: props.orderItem.quantity,
-						parAmount: props.orderItem.parAmount,
+						shopItemId: props.shopItem.shopItemId,
+						shopItemName: props.shopItem.shopItemName,
+						shopItemCategory: props.shopItem.shopItemCategory,
+						price: props.shopItem.price,
+						buyPrice: props.shopItem.buyPrice,
+						quantity: props.shopItem.quantity,
+						parAmount: props.shopItem.parAmount,
 						orderAmount: quantity.value
 					}
 					store.commit('addOrderItem', item);
 				} else {
-					store.commit('updateOrderItemQuantity', { id: props.orderItem.shopItemId, newQuantity: quantity.value })
+					store.commit('updateOrderItemQuantity', { id: props.shopItem.shopItemId, newQuantity: quantity.value })
 				}
 			}
 		}

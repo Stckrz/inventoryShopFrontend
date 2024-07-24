@@ -12,16 +12,16 @@ export default defineComponent({
 	},
 	setup() {
 		const route = useRoute();
-		const category = ref(route.params.category);
+		const category = ref<String>(route.params.category as string);
 		const itemArray = ref<ShopItem[]>([])
 
 		onMounted(() => {
-			getStoreItemsByCategory(category.value).then((data) => {
+			getStoreItemsByCategory(category.value as string).then((data) => {
 				itemArray.value = data;
 			})
 		})
 
-		watch(() => route.params.category, (newcategory) => {
+		watch(() => route.params.category as string, (newcategory) => {
 			getStoreItemsByCategory(newcategory).then((data) => {
 				category.value = newcategory
 				itemArray.value = data;
@@ -47,7 +47,7 @@ export default defineComponent({
 				<td>{{ item.quantity }}</td>
 				<td>{{ item.price }}</td>
 				<td class="orderCell">
-					<QuantityCounter :orderItem="item" />
+					<QuantityCounter :shopItem="item" />
 				</td>
 			</tr>
 		</table>

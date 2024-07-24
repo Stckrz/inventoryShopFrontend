@@ -8,9 +8,12 @@ export default defineComponent({
 		categoryPicker,
 		Cart
 	},
+	methods: {
+
+	},
 	setup() {
 		const cartOpen = ref(false);
-		const toggleCart = () => {
+		const toggleCart = (_event: MouseEvent): void => {
 			cartOpen.value = !cartOpen.value
 		}
 		return { toggleCart, cartOpen }
@@ -30,7 +33,7 @@ export default defineComponent({
 			<RouterView></RouterView>
 		</div>
 		<div v-if="cartOpen">
-			<Cart :toggleCart="toggleCart"/>
+			<Cart @toggle-cart="toggleCart" />
 		</div>
 	</div>
 </template>
@@ -64,7 +67,8 @@ export default defineComponent({
 	border-right: 1px solid black;
 	cursor: pointer;
 }
-.navCart{
+
+.navCart {
 	display: flex;
 }
 

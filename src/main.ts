@@ -3,7 +3,6 @@ import './style.css'
 import App from './App.vue'
 import { createRouter, createWebHistory } from 'vue-router';
 import store from './store';
-import HelloWorld from './components/HelloWorld.vue';
 import LandingPage from './components/landingPage.vue';
 import CategoryPicker from './components/shopItems/categoryPicker.vue';
 import CategoryList from './components/shopItems/categoryItemList.vue';

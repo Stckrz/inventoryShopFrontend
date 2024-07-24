@@ -1,5 +1,3 @@
-import { SentOrder, OrderedItem } from "../../models/orderModel";
-
 export async function postOrder(totalPurchaseAmount: number) {
 	const currentDate = new Date();
 	const sentOrderObject = {
@@ -9,7 +7,9 @@ export async function postOrder(totalPurchaseAmount: number) {
 	const formdata = new FormData();
 
 	for (const key in sentOrderObject) {
-		formdata.append(key, sentOrderObject[key as keyof SentOrder].toString());
+		if (sentOrderObject.hasOwnProperty(key)) {
+			formdata.append(key, (sentOrderObject as Record<string, any>)[key].toString());
+		}
 	}
 
 	try {
@@ -37,7 +37,9 @@ export async function postOrderedItem(shopItemId: number, receivedOrderId: numbe
 	}
 	const formdata = new FormData();
 	for (const key in orderedItemObject) {
-		formdata.append(key, orderedItemObject[key as keyof OrderedItem].toString());
+		if (orderedItemObject.hasOwnProperty(key)) {
+			formdata.append(key, (orderedItemObject as Record<string, any>)[key].toString());
+		}
 	}
 
 	try {

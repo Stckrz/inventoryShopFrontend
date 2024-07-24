@@ -3,13 +3,8 @@ import { defineComponent, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 export default defineComponent({
 	name: "Cart",
-	props: {
-		toggleCart: {
-			type: Function,
-			required: true
-		}
-	},
-	setup() {
+	emits: ['toggle-cart'],
+	setup(_, { emit }) {
 		const store = useStore();
 		const cartTotal = ref(0);
 		const getCartTotal = () => {
@@ -19,11 +14,14 @@ export default defineComponent({
 			}
 			return (total)
 		}
+		const emitToggleCart = (event: MouseEvent): void => {
+			emit('toggle-cart', event)
+		}
 
 		onMounted(() => {
 			cartTotal.value = getCartTotal();
 		})
-		return { store, cartTotal }
+		return { store, cartTotal, emitToggleCart }
 	}
 })
 </script>
@@ -31,7 +29,7 @@ export default defineComponent({
 <template>
 	<div class="cartView">
 		<div class="cartItemTableContainer">
-		<button class="cartCloseButton" @click="toggleCart">X</button>
+			<button class="cartCloseButton" @click="emitToggleCart">X</button>
 			<table class="cartItemTable">
 				<tr>
 					<th>Name</th>
@@ -50,7 +48,7 @@ export default defineComponent({
 		<div class="totalBox">
 			total: {{ cartTotal }}
 			<RouterLink class="navItem" to="/processOrder">
-				<div @click="toggleCart" class="orderProcessButton">
+				<div @click="emitToggleCart" class="orderProcessButton">
 					Process
 
 				</div>
@@ -72,17 +70,21 @@ export default defineComponent({
 	width: 30%;
 	height: 92%;
 }
-.cartItemTable{
+
+.cartItemTable {
 	border: none;
 }
+
 th {
 	border: none;
 }
+
 .cartItemTableContainer {
 	max-height: 90%;
 	overflow: auto;
 }
-.cartCloseButton{
+
+.cartCloseButton {
 	padding: 4px;
 	background-color: #acb0aa;
 	width: 10%;

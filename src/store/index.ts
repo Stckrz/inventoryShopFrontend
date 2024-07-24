@@ -19,7 +19,7 @@ export default createStore({
 		},
 		updateOrderItemQuantity(state: State, params: UpdateQuantityObject) {
 			const {id, newQuantity} = params;
-			const orderItem = state.orderItems.find(item => item.shopItemId === id);
+			const orderItem = state.orderItems.find(item => item.shopItemId.toString() === id);
 			if (orderItem) {
 				orderItem.orderAmount = newQuantity;
 			}

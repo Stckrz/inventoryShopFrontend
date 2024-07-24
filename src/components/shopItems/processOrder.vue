@@ -18,10 +18,6 @@ export default defineComponent({
 		}
 
 		const confirmOrder = async () => {
-			const todaysDate = new Date()
-			const sentOrder = {
-				totalOrderAmount: cartTotal.value
-			}
 			const sentStatus = await postOrder(cartTotal.value)
 			if (sentStatus) {
 				for (let i = 0; i < store.state.orderItems.length; i++) {

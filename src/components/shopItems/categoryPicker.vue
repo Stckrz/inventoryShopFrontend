@@ -5,10 +5,11 @@ import { getSaleItemCategories } from '../../library/api/storeItemApi';
 export default defineComponent({
 	name: "CategoryPicker",
 	setup() {
-		const saleItemCategories = ref<string[]>([]);
+		const saleItemCategories = ref<string[] | undefined | { message: string }>([]);
 		onMounted(() => {
-			getSaleItemCategories().then((data: string[]) => {
-				saleItemCategories.value = data;
+			getSaleItemCategories().then((data) => {
+				if (data)
+					saleItemCategories.value = data;
 			})
 		})
 		return { saleItemCategories }
@@ -52,5 +53,4 @@ export default defineComponent({
 	color: black;
 	text-decoration: none;
 }
-
 </style>
