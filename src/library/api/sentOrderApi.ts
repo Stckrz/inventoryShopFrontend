@@ -13,7 +13,7 @@ export async function postOrder(totalPurchaseAmount: number) {
 	}
 
 	try {
-		const response = await fetch('http://localhost:8080/receivedOrders/index.php', {
+		const response = await fetch('http://slimyan.com/receivedOrders/', {
 			method: "POST",
 			body: formdata
 		})
@@ -43,7 +43,7 @@ export async function postOrderedItem(shopItemId: number, receivedOrderId: numbe
 	}
 
 	try {
-		const response = await fetch('http://localhost:8080/orderedItems/index.php', {
+		const response = await fetch('http://slimyan.com/orderedItems/', {
 			method: "POST",
 			body: formdata
 		})
