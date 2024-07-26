@@ -1,7 +1,7 @@
 export async function getStoreItemsByCategory(category: string){
 	try{
 		// const response = await fetch(`http://localhost:8080/shopItems.php?category=${category}`)
-		const response = await fetch(`http://slimyan.us/shopItems?category=${category}`)
+		const response = await fetch(`https://slimyan.us/shopItems?category=${category}`)
 		const data = await response.json();
 		if(response.status === 200){
 			return data;
@@ -16,7 +16,7 @@ export async function getStoreItemsByCategory(category: string){
 
 export async function getSaleItemCategories(){
 	try{
-		const response = await fetch('http://slimyan.us/shopItems?categoryList');
+		const response = await fetch('https://slimyan.us/shopItems?categoryList');
 		// const response = await fetch('http://localhost:8080/shopItems.php?categoryList');
 		const data = await response.json();
 		const categoryArray = []
