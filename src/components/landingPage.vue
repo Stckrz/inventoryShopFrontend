@@ -38,6 +38,7 @@ export default defineComponent({
 			<p>
 				Here is where you can find the webpage for the inventory system:
 			</p>
+			<a href="https://stckrz.com/vueFrontend">go</a>
 		</h5>
 	</div>
 </template>
